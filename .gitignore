@@ -43,6 +43,10 @@ rules.ninja
 # Claude Code workspace (user-local)
 .claude/
 
+# Local CMake presets — machine-specific toolchain paths live here so they
+# do not leak into the shared CMakePresets.json.
+CMakeUserPresets.json
+
 # Local VS Code overrides (team-shared .vscode/ files are tracked)
 .vscode/*.local.json
 .vscode/settings.local.json
