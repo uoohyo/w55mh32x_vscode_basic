@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug (J-Link)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/debug/w55mh32x_vscode_basic.elf",
+            "servertype": "jlink",
+            "device": "W55MH32",
+            "interface": "swd",
+            "runToEntryPoint": "main",
+            "preLaunchTask": "Build (debug)",
+            "svdFile": "${workspaceFolder}/drivers/CMSIS/Device/WIZnet/W55MH32X/svd/W55MH32.svd"
+        },
+        {
+            "name": "Debug (OpenOCD + CMSIS-DAP)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/debug/w55mh32x_vscode_basic.elf",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/w55mh32.cfg"
+            ],
+            "runToEntryPoint": "main",
+            "preLaunchTask": "Build (debug)",
+            "svdFile": "${workspaceFolder}/drivers/CMSIS/Device/WIZnet/W55MH32X/svd/W55MH32.svd"
+        }
+    ]
+}

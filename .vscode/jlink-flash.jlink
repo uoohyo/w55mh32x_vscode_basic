@@ -1,0 +1,4 @@
+loadfile build/debug/w55mh32x_vscode_basic.hex
+r
+g
+qc
