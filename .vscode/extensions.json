@@ -1,10 +1,85 @@
 {
     "recommendations": [
+        // * 깃 관련 기본 익스텐션
+
+        // 깃 히스토리. 깃 커밋의 히스토리(+깃 로그)를 보여주는 플러그인. 깃렌즈의 파일히스토리 기능과 비슷하지만,
+        // 파일 히스토리는 파일 단위로 보여주는 반면, 깃 히스토리는 커밋 단위로 보여줌. 둘 다 사용하면 좋음
+        "donjayamanne.githistory",
+        // 깃 그래프. 깃 커밋 그래프를 보여주는 플러그인. 브랜치가 많고 머지, 체크아웃 등의 변화가 많은 프로젝트의 경우 매우 유용함.
+        "mhutchie.git-graph",
+        // 깃 블레임. 깃 커밋을 마우스오버하면 해당 커밋의 작성자, 커밋 메시지 등을 보여주는 플러그인.
+        "waderyan.gitblame",
+
+        // * 커밋 컨벤션 관련 익스텐션
+
+        // 깃 이모지, 커밋 메시지에 이모지 추가해주는 플러그인. 커밋 메시지에 이모지 추가하면 커밋 메시지가 더 읽기 쉽게 됨
+        "seatonjiang.gitmoji-vscode",
+        // 커밋 메시지를 GUI로 편하게 작성할 수 있게 해주는 편집기. 커밋 템플릿을 미리 정의해두고 재사용할 때 유용함
+        "adam-bender.commit-message-editor",
+
+        // * 코드 내 주석 관련 익스텐션
+
+        // Better Comments Enhanced. TODO, FIXME, NOTE 등의 주석을 더 다양하게 색상/스타일로 구분해주는 확장
+        "aaron-bond.better-comments",
+        // 함수/클래스 시그니처를 기반으로 Doxygen 주석 블럭을 자동 생성해주는 확장
+        "cschlosser.doxdocgen",
+
+        // * 휴먼 실수 방지 익스텐션 (린터/포맷터/오탈자 체크 등)
+
+        // 마크다운 올인원. 마크다운을 작성할 때 편리한 기능(HTML 익스포트, 코드블럭/수학블럭 토글 기능 등)을 대부분 제공하는 플러그인
+        "yzhang.markdown-all-in-one",
+        // 마크다운 린트. 마크다운 문법을 검사해주는 플러그인. 헤딩 레벨이 잘못되었는지, 링크가 잘못되었는지 등을 검사해줌
+        "davidanson.vscode-markdownlint",
+
+        // * 편의성 익스텐션
+
+        // cmake 파일의 스크립트에 대한 포멧팅 기능을 제공하는 플러그인
+        "intellect-ind-in.cmake-formatter",
+        // 코드 블럭을 더 세밀하게 접었다 펼칠 수 있게 해주는 개선된 폴딩 플러그인
+        "mohammadbaqer.better-folding",
+        // VSCode 내에서 PowerShell 스크립트 실행과 디버깅을 지원하는 공식 PowerShell 확장
+        "ms-vscode.powershell",
+        // C/C++ 코드에서 Doxygen 스타일 주석을 작성할 때 문법 하이라이팅과 편의 기능을 제공하는 확장
+        "bbenoist.doxygen",
+        // Doxygen을 실행해서 HTML/PDF 문서를 생성할 수 있게 해주는 런너 확장
+        "betwo.vscode-doxygen-runner",
+        // VSCode 안에서 PDF 파일을 바로 열어보고 간단한 뷰어 기능을 제공하는 확장
+        "tomoki1207.pdf",
+
+        // * C/C++ 개발 관련 익스텐션
+
+        // C/C++ 인텔리센스, 디버깅, 코드 탐색 기능 제공 (확장팩 메타패키지 대신 핵심 단일 확장만 추천)
         "ms-vscode.cpptools",
+
+        // * CMake 개발 관련 익스텐션
+
+        // CMake 기반 C/C++ 프로젝트를 구성/빌드/디버깅할 때 사용하는 공식 CMake 확장
         "ms-vscode.cmake-tools",
+        // CMake 스크립트(CMakeLists.txt, *.cmake)에 대한 문법 하이라이트 제공
         "twxs.cmake",
+
+        // * Cortex-M 디버깅 관련 익스텐션
+
+        // Arm Cortex-M 계열 MCU 개발을 위한 디버거 확장. 세그가 등 하드웨어 디버거와 연동해 디버깅 가능
         "marus25.cortex-debug",
+        // Cortex-M 디버깅 시, 디버그 세션 이력/상태를 추적해주는 보조 확장
+        "mcu-debug.debug-tracker-vscode",
+        // 디버깅 중 메모리 영역(Heap/Stack/레지스터 등)을 시각적으로 확인할 수 있는 메모리 뷰어 확장
+        "mcu-debug.memory-view",
+        // 레지스터/주변장치 등의 하드웨어 리소스를 GUI로 보여주는 주변장치 뷰어 확장
+        "mcu-debug.peripheral-viewer",
+
+        // * Cortex-M 개발 관련 익스텐션
+
+        // Arm 어셈블리 언어에 대한 문법 하이라이팅 제공
         "dan-c-underwood.arm",
-        "zixuanwang.linkerscript"
+        // 링커 스크립트(.ld 등)에 대한 문법 하이라이팅을 제공해 빌드 스크립트 편집을 편하게 해줌
+        "zixuanwang.linkerscript",
+        // GNU 링커에서 생성하는 .map 파일에 대해 문법 하이라이팅과 심볼 목록 보기를 제공해, 플래시/RAM 사용량을 분석할 때 유용함
+        "trond-snekvik.gnu-mapfiles",
+        // 바이너리 파일을 16진수(헥스)로 직접 열어보고 수정할 수 있는 헥스 에디터 확장
+        "ms-vscode.hexeditor",
+        // C++ 전용 개선된 문법 하이라이팅을 제공해 템플릿/메타프로그래밍 코드 가독성을 높여줌
+        "jeff-hykin.better-cpp-syntax"
     ]
 }
