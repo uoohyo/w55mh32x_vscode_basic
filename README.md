@@ -1,8 +1,14 @@
-# w55mh32x_vscode_basic
+<!-- markdownlint-disable MD033 MD041 -->
+<p align="center">
+  <img src="./imgs/w55mh32x_vscode_basic_banner.png" alt="w55mh32x_vscode_basic_banner" width="800" />
+</p>
 
-![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
-![MCU: W55MH32 (Cortex-M3)](https://img.shields.io/badge/MCU-W55MH32%20Cortex--M3-green.svg)
-![Toolchain: arm-none-eabi-gcc](https://img.shields.io/badge/toolchain-arm--none--eabi--gcc-orange.svg)
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT">
+  <img src="https://img.shields.io/badge/MCU-W55MH32%20Cortex--M3-green.svg" alt="MCU: W55MH32 (Cortex-M3)">
+  <img src="https://img.shields.io/badge/toolchain-arm--none--eabi--gcc-orange.svg" alt="Toolchain: arm-none-eabi-gcc">
+</p>
+<!-- markdownlint-enable MD033 MD041 -->
 
 ## Overview
 
@@ -94,7 +100,24 @@ under `docs/`.
 
 ## License
 
-This project's template code is released under the MIT License — see
-[`LICENSE`](LICENSE). Vendor sources under `drivers/` retain their
-original WIZnet / ARM CMSIS licenses (see the `LICENSE` files inside
-each vendor directory).
+[MIT License](./LICENSE)
+
+Copyright (c) 2026 [uoohyo](https://github.com/uoohyo)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
