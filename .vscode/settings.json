@@ -17,7 +17,7 @@
     // paths, for example:
     //   "cmake.cmakePath": "C:/Program Files/CMake/bin/cmake.exe",
     //   "cmake.ninjaPath": "C:/Program Files/Ninja/ninja.exe"
-    "cmake.cmakePath": "cmake",
+    "cmake.cmakePath": "C:/Program Files/CMake/bin/cmake.exe",
     "cmake.ninjaPath": "ninja",
 
     // ---- File hygiene -------------------------------------------------
