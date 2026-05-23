@@ -24,7 +24,7 @@ DSP libraries) untouched while application code lives under `core/`.
 ## Requirements
 
 | Tool | Version | Notes |
-|------|---------|-------|
+| ---- | ------- | ----- |
 | `arm-none-eabi-gcc` | 10.3+ | C11 / C++17 capable |
 | CMake | 3.22+ | Required for `CMakePresets.json` v6 |
 | Ninja | any recent | Used by all presets |
@@ -37,7 +37,7 @@ ARM syntax, linker script highlighting).
 
 ## Project Structure
 
-```
+```text
 .
 ├── CMakeLists.txt              Root project + executable target
 ├── CMakePresets.json           Debug / Release presets (Ninja)
@@ -86,7 +86,7 @@ list to program the target.
 ## MCU Info
 
 | Item | Value |
-|------|-------|
+| ---- | ----- |
 | Vendor | WIZnet |
 | Family | W55MH32 |
 | Core | ARM Cortex-M3 |
