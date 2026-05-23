@@ -45,3 +45,17 @@ target_compile_definitions(w55mh32x_hal INTERFACE
     USE_STDPERIPH_DRIVER
     W55MH32
 )
+
+# Vendor-owned SPL driver triggers -Wparentheses on line 597
+# ("if(GPIO_Remap == GPIO_Remap_FSMC1 | GPIO_Remap == GPIO_Remap_FSMC2)" —
+# bitwise OR of comparison results without explicit grouping).
+# Silence the warning at the file scope rather than patching vendor code.
+# DIRECTORY ${CMAKE_SOURCE_DIR} is required because the executable that
+# actually compiles this source lives in the root scope (CMake 3.18+
+# scoped-source-properties semantics); without it the option would only
+# apply in this subdirectory and the warning would persist.
+set_source_files_properties(
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_gpio.c
+    DIRECTORY ${CMAKE_SOURCE_DIR}
+    PROPERTIES COMPILE_OPTIONS "-Wno-parentheses"
+)
