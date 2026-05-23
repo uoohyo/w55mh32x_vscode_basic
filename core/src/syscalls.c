@@ -14,6 +14,12 @@
 #undef errno
 extern int errno;
 
+/**
+ * @brief Stub for close(): there is no filesystem, so closing any
+ *        descriptor always fails with ENOSYS.
+ * @param fd File descriptor (ignored).
+ * @return Always -1, with errno set to ENOSYS.
+ */
 __attribute__((weak)) int _close(int fd)
 {
     (void)fd;
@@ -21,6 +27,13 @@ __attribute__((weak)) int _close(int fd)
     return -1;
 }
 
+/**
+ * @brief Stub for lseek(): no seekable streams exist on bare-metal.
+ * @param fd     File descriptor (ignored).
+ * @param offset Requested seek offset (ignored).
+ * @param whence SEEK_SET / SEEK_CUR / SEEK_END (ignored).
+ * @return Always -1, with errno set to ENOSYS.
+ */
 __attribute__((weak)) int _lseek(int fd, int offset, int whence)
 {
     (void)fd;
@@ -30,6 +43,14 @@ __attribute__((weak)) int _lseek(int fd, int offset, int whence)
     return -1;
 }
 
+/**
+ * @brief Stub for read(): no input devices wired by default. Override
+ *        in the application to route stdin to UART or similar.
+ * @param fd  File descriptor (ignored).
+ * @param buf Destination buffer (ignored).
+ * @param len Number of bytes requested (ignored).
+ * @return Always -1, with errno set to ENOSYS.
+ */
 __attribute__((weak)) int _read(int fd, char *buf, int len)
 {
     (void)fd;
@@ -39,6 +60,15 @@ __attribute__((weak)) int _read(int fd, char *buf, int len)
     return -1;
 }
 
+/**
+ * @brief Stub for write(): no output devices wired by default. Override
+ *        in the application to route stdout/stderr to UART (printf
+ *        retargeting) or similar.
+ * @param fd  File descriptor (ignored).
+ * @param buf Source buffer (ignored).
+ * @param len Number of bytes to write (ignored).
+ * @return Always -1, with errno set to ENOSYS.
+ */
 __attribute__((weak)) int _write(int fd, const char *buf, int len)
 {
     (void)fd;
@@ -48,12 +78,26 @@ __attribute__((weak)) int _write(int fd, const char *buf, int len)
     return -1;
 }
 
+/**
+ * @brief Stub for isatty(): newlib's stdio uses this to decide whether
+ *        to buffer line-by-line. Returning 1 (terminal) is the safe
+ *        choice for bare-metal serial output.
+ * @param fd File descriptor (ignored).
+ * @return Always 1.
+ */
 __attribute__((weak)) int _isatty(int fd)
 {
     (void)fd;
     return 1; /* treat all fds as terminal — harmless for bare-metal */
 }
 
+/**
+ * @brief Stub for fstat(): reports every descriptor as a character
+ *        device so newlib does not try to seek or stat-size it.
+ * @param fd File descriptor (ignored).
+ * @param st Caller-provided stat buffer; only st_mode is populated.
+ * @return Always 0.
+ */
 __attribute__((weak)) int _fstat(int fd, struct stat *st)
 {
     (void)fd;
@@ -61,11 +105,21 @@ __attribute__((weak)) int _fstat(int fd, struct stat *st)
     return 0;
 }
 
+/**
+ * @brief Stub for getpid(): there is only one execution context.
+ * @return Always 1.
+ */
 __attribute__((weak)) int _getpid(void)
 {
     return 1;
 }
 
+/**
+ * @brief Stub for kill(): no process model to signal.
+ * @param pid Target pid (ignored).
+ * @param sig Signal number (ignored).
+ * @return Always -1, with errno set to EINVAL.
+ */
 __attribute__((weak)) int _kill(int pid, int sig)
 {
     (void)pid;
@@ -74,6 +128,11 @@ __attribute__((weak)) int _kill(int pid, int sig)
     return -1;
 }
 
+/**
+ * @brief Stub for exit(): nowhere to return to on bare-metal. Spins
+ *        forever so the debugger can inspect the final state.
+ * @param status Exit status (ignored).
+ */
 __attribute__((weak)) void _exit(int status)
 {
     (void)status;

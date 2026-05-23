@@ -20,6 +20,19 @@ extern char _end;          /* first byte after .bss  */
 extern char _estack;       /* top of the stack region */
 extern uint32_t _Min_Heap_Size; /* minimum required heap */
 
+/**
+ * @brief Newlib heap allocator backend. Bumps the heap break by @p incr
+ *        bytes and returns the previous break (i.e. the start address of
+ *        the newly allocated chunk). Called by malloc / calloc / printf
+ *        internals. Refuses to advance past the lowest legal stack
+ *        address to keep heap and stack from colliding.
+ * @param incr Number of bytes to extend the heap by; may be 0 to query
+ *             the current break, or negative to release recently grown
+ *             memory (newlib rarely does this).
+ * @return Pointer to the previous heap end on success;
+ *         (void *)-1 with errno=ENOMEM if the request would collide
+ *         with the reserved stack region.
+ */
 __attribute__((weak)) void *_sbrk(ptrdiff_t incr)
 {
     static char *heap_end = NULL;
