@@ -2,32 +2,37 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug (J-Link)",
-            "type": "cortex-debug",
-            "request": "launch",
+            "name": "Debug (pyOCD + WIZ-Link)",
             "cwd": "${workspaceFolder}",
-            "executable": "${workspaceFolder}/build/debug/w55mh32x_vscode_basic.elf",
-            "servertype": "jlink",
-            "device": "W55MH32",
-            "interface": "swd",
+            "type": "cortex-debug",
+            "executable": "${command:cmake.launchTargetPath}",
+            "request": "launch",
+            "servertype": "pyocd",
+            "svdFile": "${workspaceFolder}/drivers/CMSIS/Device/WIZnet/W55MH32X/svd/W55MH32.svd",
+            "showDevDebugOutput": "none",
             "runToEntryPoint": "main",
-            "preLaunchTask": "Build (debug)",
-            "svdFile": "${workspaceFolder}/drivers/CMSIS/Device/WIZnet/W55MH32X/svd/W55MH32.svd"
+            "serverArgs": [
+                "--target", "w55mh32l",
+                "--pack", "${workspaceFolder}/drivers/CMSIS/Device/WIZnet/W55MH32X/pack/WIZnet.W55MH32_DFP.1.0.0.pack",
+                "-c", "echo GDB server started on port 50000"
+            ],
+            "liveWatch": { "enabled": true, "samplesPerSecond": 4 }
         },
         {
-            "name": "Debug (OpenOCD + CMSIS-DAP)",
-            "type": "cortex-debug",
-            "request": "launch",
+            "name": "Debug (J-Link)",
             "cwd": "${workspaceFolder}",
-            "executable": "${workspaceFolder}/build/debug/w55mh32x_vscode_basic.elf",
-            "servertype": "openocd",
-            "configFiles": [
-                "interface/cmsis-dap.cfg",
-                "target/w55mh32.cfg"
-            ],
+            "type": "cortex-debug",
+            "executable": "${command:cmake.launchTargetPath}",
+            "request": "launch",
+            "servertype": "jlink",
+            "device": "W55MH32X",
+            "interface": "swd",
+            "serialNumber": "",
             "runToEntryPoint": "main",
-            "preLaunchTask": "Build (debug)",
-            "svdFile": "${workspaceFolder}/drivers/CMSIS/Device/WIZnet/W55MH32X/svd/W55MH32.svd"
+            "showDevDebugOutput": "none",
+            "serverArgs": ["-m", "0"],
+            "svdFile": "${workspaceFolder}/drivers/CMSIS/Device/WIZnet/W55MH32X/svd/W55MH32.svd",
+            "liveWatch": { "enabled": true, "samplesPerSecond": 4 }
         }
     ]
 }
