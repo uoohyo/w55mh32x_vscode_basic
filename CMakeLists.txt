@@ -43,6 +43,11 @@ target_link_options(${TARGET} PRIVATE
     -Wl,--gc-sections
     --specs=nano.specs
     --specs=nosys.specs
+    # Cortex-M3 is bare-metal without an MMU, so the RAM LOAD segment is
+    # legitimately RWX. GCC 12+ flags this even though the .data copy
+    # pattern in startup_w55mh32.s makes it intentional — silence the
+    # spurious warning.
+    -Wl,--no-warn-rwx-segments
 )
 
 # Post-build: emit hex + bin and print a size summary so each build
