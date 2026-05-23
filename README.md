@@ -37,11 +37,11 @@ ARM syntax, linker script highlighting).
 ├── CMakePresets.json           Debug / Release presets (Ninja)
 ├── cmake/
 │   ├── gcc-arm-none-eabi.cmake Toolchain (cortex-m3, soft FP)
-│   └── w55mh32x/
+│   └── w55mh32/
 │       └── CMakeLists.txt      INTERFACE library bundling SPL + CMSIS
 ├── core/
 │   ├── inc/                    Application headers (main.h, *_it.h, conf)
-│   └── src/                    main.c, w55mh32x_it.c, w55mh32x_msp.c,
+│   └── src/                    main.c, w55mh32_it.c, w55mh32_msp.c,
 │                               and the CMSIS system/core sources
 ├── drivers/
 │   ├── CMSIS/Device/WIZnet/W55MH32X/   CMSIS device pack (inc/lib/pack)
