@@ -6,9 +6,6 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include "wizchip_conf.h"
-
-
 
 #define WIZCHIP_CREG_BLOCK     0x00                   //< Common register block
 #define WIZCHIP_SREG_BLOCK(N)  (1 + 4 * N)            //< Socket N register block
@@ -17,7 +14,6 @@ extern "C" {
 
 #define WIZCHIP_OFFSET_INC(ADDR, N) (ADDR + (N << 8)) //< Increase offset address
 
-
 ///////////////////////////////////////
 // Definition For Legacy Chip Driver //
 ///////////////////////////////////////
@@ -25,7 +21,6 @@ extern "C" {
 #define IINCHIP_WRITE(ADDR, VAL)          WIZCHIP_WRITE(ADDR, VAL)         ///< The defined for legacy chip driver
 #define IINCHIP_READ_BUF(ADDR, BUF, LEN)  WIZCHIP_READ_BUF(ADDR, BUF, LEN) ///< The defined for legacy chip driver
 #define IINCHIP_WRITE_BUF(ADDR, BUF, LEN) WIZCHIP_WRITE(ADDR, BUF, LEN)    ///< The defined for legacy chip driver
-
 
 #define WZTOE_MR       ((0x0000 << 8) + (WIZCHIP_CREG_BLOCK << 3))
 #define WZTOE_GAR      ((0x0001 << 8) + (WIZCHIP_CREG_BLOCK << 3))
@@ -88,7 +83,6 @@ extern "C" {
 #define IR_UNREACH  0x40
 #define IR_PPPoE    0x20
 #define IR_MP       0x10
-
 
 /* WZTOE_PHYCFGR register value */
 #define PHYCFGR_RST         ~(1 << 7) //< For PHY reset, must operate AND mask.
@@ -179,8 +173,6 @@ extern "C" {
 #define IPPROTO_IDP  22  //< XNS idp
 #define IPPROTO_ND   77  //< UNOFFICIAL net disk protocol
 #define IPPROTO_RAW  255 //< Raw IP packet
-
-
 
 ////////////////////////
 // Basic I/O Function //
@@ -1004,7 +996,7 @@ uint16_t getSn_RX_RSR(uint8_t sn);
 /////////////////////////////////////
 // Sn_TXBUF & Sn_RXBUF IO function //
 /////////////////////////////////////
-/**  
+/**
  * @brief Socket_register_access_function
  * @brief Gets the max buffer size of socket sn passed as parameter.
  * @param (uint8_t)sn Socket number. It should be <b>0 ~ 7</b>.
@@ -1013,7 +1005,7 @@ uint16_t getSn_RX_RSR(uint8_t sn);
 #define getSn_RxMAX(sn) \
     (((uint16_t)getSn_RXBUF_SIZE(sn)) << 10)
 
-/**  
+/**
  * @brief Socket_register_access_function
  * @brief Gets the max buffer size of socket sn passed as parameters.
  * @param (uint8_t)sn Socket number. It should be <b>0 ~ 7</b>.
@@ -1063,7 +1055,7 @@ void wiz_recv_data(uint8_t sn, uint8_t *wizdata, uint16_t len);
  */
 void wiz_recv_ignore(uint8_t sn, uint16_t len);
 
-/**  
+/**
  * @brief Initialize TOE
  * @brief Initialize TOE to use Ethernet functions
  */
