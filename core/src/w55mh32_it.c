@@ -1,11 +1,45 @@
 /**
- * @file    w55mh32_it.c
- * @brief   Default Cortex-M3 system exception handlers.
- *          Fault handlers spin to keep the failing state visible to the debugger.
+ ******************************************************************************
+ * @file           : w55mh32_it.c
+ * @brief          : Default Cortex-M3 system exception handlers.
+ *                   Fault handlers spin to keep the failing state visible to the debugger.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2026 uoohyo
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ ******************************************************************************
  */
+
+/* Includes ------------------------------------------------------------------*/
 #include "w55mh32_it.h"
 #include "main.h"
 
+/* Typedef -------------------------------------------------------------------*/
+
+/* Define --------------------------------------------------------------------*/
+
+/* Variables -----------------------------------------------------------------*/
+
+/* Function -----------------------------------------------------------------*/
 /**
  * @brief Non-Maskable Interrupt handler. Empty default — NMI is rarely
  *        wired on this MCU; override if a clock-security or watchdog
