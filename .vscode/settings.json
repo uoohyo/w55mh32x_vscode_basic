@@ -20,6 +20,16 @@
     "cmake.cmakePath": "C:/Program Files/CMake/bin/cmake.exe",
     "cmake.ninjaPath": "ninja",
 
+    // Always inject ARM_TOOLCHAIN_DIR at configure time so the toolchain
+    // file resolves "arm-none-eabi-gcc" to the official Arm GNU toolchain
+    // even when CMakeUserPresets.json is not loaded or the developer
+    // picks the shared "debug"/"release" preset directly. Bypasses
+    // STM32CubeCLT's bundled GNU tools that would otherwise win PATH
+    // lookup on a typical Windows install.
+    "cmake.configureSettings": {
+        "ARM_TOOLCHAIN_DIR": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin"
+    },
+
     // ---- File hygiene -------------------------------------------------
     "files.eol": "\n",
     "files.insertFinalNewline": true,
