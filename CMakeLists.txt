@@ -24,6 +24,8 @@ set(CORE_SRC
     ${CMAKE_SOURCE_DIR}/core/src/main.c
     ${CMAKE_SOURCE_DIR}/core/src/w55mh32_it.c
     ${CMAKE_SOURCE_DIR}/core/src/w55mh32_msp.c
+    ${CMAKE_SOURCE_DIR}/core/src/syscalls.c   # newlib syscall stubs
+    ${CMAKE_SOURCE_DIR}/core/src/sysmem.c     # newlib heap (_sbrk)
 )
 
 add_executable(${TARGET}
