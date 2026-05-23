@@ -48,11 +48,12 @@ ARM syntax, linker script highlighting).
 ├── core/
 │   ├── inc/                    Application headers (main.h, *_it.h, conf)
 │   └── src/                    main.c, w55mh32_it.c, w55mh32_msp.c,
-│                               and the CMSIS system/core sources
+│                               syscalls.c + sysmem.c (newlib stubs),
+│                               CMSIS system/core sources
 ├── drivers/
-│   ├── CMSIS/Device/WIZnet/W55MH32X/   CMSIS device pack (inc/lib/pack)
+│   ├── CMSIS/Device/WIZnet/W55MH32X/   CMSIS device pack (inc, lib, pack, svd, flash)
 │   └── W55MH32X_Driver/                Vendor SPL (inc/src/lib/cryptlib)
-├── docs/                       Reference manuals, datasheet, design docs
+├── docs/                       Reference manuals + datasheet (PDF)
 ├── startup_w55mh32.s           Cortex-M3 startup (vector table, SystemInit)
 ├── w55mh32x_flash.ld           GNU LD linker script (flash + SRAM layout)
 └── .vscode/                    Team-shared tasks, launch, IntelliSense
@@ -91,7 +92,7 @@ list to program the target.
 | Family | W55MH32 |
 | Core | ARM Cortex-M3 |
 | FPU | None (soft float) |
-| Toolchain | arm-none-eabi-gcc, `nano.specs` + `nosys.specs` |
+| Toolchain | arm-none-eabi-gcc, `nano.specs` (custom syscall stubs via `core/src/syscalls.c`) |
 | Build flags | `-mcpu=cortex-m3 -mthumb -mfloat-abi=soft` |
 
 Flash and SRAM addresses, sizes, and section layout are defined in
