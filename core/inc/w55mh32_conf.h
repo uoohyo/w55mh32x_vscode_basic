@@ -9,32 +9,32 @@
 #define __W55MH32_CONF_H
 
 /* Always-on core peripherals */
-#include "w55mh32_rcc.h"
-#include "w55mh32_gpio.h"
 #include "misc.h"
 
-/* Optional peripherals — uncomment as needed */
-/* #include "w55mh32_adc.h"      */
-/* #include "w55mh32_bkp.h"      */
-/* #include "w55mh32_can.h"      */
-/* #include "w55mh32_crc.h"      */
-/* #include "w55mh32_dac.h"      */
-/* #include "w55mh32_dbgmcu.h"   */
-/* #include "w55mh32_dma.h"      */
-/* #include "w55mh32_exti.h"     */
-/* #include "w55mh32_flash.h"    */
-/* #include "w55mh32_i2c.h"      */
-/* #include "w55mh32_iwdg.h"     */
-/* #include "w55mh32_otp.h"      */
-/* #include "w55mh32_pwr.h"      */
-/* #include "w55mh32_rtc.h"      */
-/* #include "w55mh32_sdio.h"     */
-/* #include "w55mh32_spi.h"      */
-/* #include "w55mh32_tim.h"      */
-/* #include "w55mh32_trng.h"     */
-/* #include "w55mh32_usart.h"    */
-/* #include "w55mh32_wwdg.h"     */
-/* #include "w55mh32_wztoe.h"    */
+/* Optional peripherals */
+#include "w55mh32_adc.h"
+#include "w55mh32_bkp.h"
+#include "w55mh32_can.h"
+#include "w55mh32_crc.h"
+#include "w55mh32_dac.h"
+#include "w55mh32_dbgmcu.h"
+#include "w55mh32_dma.h"
+#include "w55mh32_exti.h"
+#include "w55mh32_flash.h"
+#include "w55mh32_gpio.h"
+#include "w55mh32_i2c.h"
+#include "w55mh32_iwdg.h"
+#include "w55mh32_otp.h"
+#include "w55mh32_pwr.h"
+#include "w55mh32_rcc.h"
+#include "w55mh32_rtc.h"
+#include "w55mh32_sdio.h"
+#include "w55mh32_spi.h"
+#include "w55mh32_tim.h"
+#include "w55mh32_trng.h"
+#include "w55mh32_usart.h"
+#include "w55mh32_wwdg.h"
+#include "w55mh32_wztoe.h"
 
 #ifdef USE_FULL_ASSERT
   #define assert_param(expr) \

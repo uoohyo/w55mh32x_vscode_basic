@@ -10,8 +10,6 @@
 extern "C" {
 #endif
 
-#include "w55mh32.h"
-
 /* Cortex-M3 system exception handlers */
 void NMI_Handler(void);
 void HardFault_Handler(void);
