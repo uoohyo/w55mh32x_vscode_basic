@@ -20,14 +20,25 @@
     "cmake.cmakePath": "C:/Program Files/CMake/bin/cmake.exe",
     "cmake.ninjaPath": "ninja",
 
-    // Always inject ARM_TOOLCHAIN_DIR at configure time so the toolchain
-    // file resolves "arm-none-eabi-gcc" to the official Arm GNU toolchain
-    // even when CMakeUserPresets.json is not loaded or the developer
-    // picks the shared "debug"/"release" preset directly. Bypasses
-    // STM32CubeCLT's bundled GNU tools that would otherwise win PATH
-    // lookup on a typical Windows install.
-    "cmake.configureSettings": {
+    // cmake-tools ignores "cmake.configureSettings" when
+    // "cmake.useCMakePresets" is "always" (see the extension docs). The
+    // reliable substitute is "cmake.environment": environment variables
+    // here are exported into the cmake process every time the extension
+    // runs configure / build, so the toolchain file's
+    //   if(DEFINED ENV{ARM_TOOLCHAIN_DIR}) ...
+    // branch always wins.
+    "cmake.environment": {
         "ARM_TOOLCHAIN_DIR": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin"
+    },
+
+    // tasks.json runs `cmake --preset ...` in the integrated terminal,
+    // which does NOT inherit "cmake.environment". Inject the same vars
+    // into the Windows terminal environment so the CLI path matches the
+    // extension path. Prepending PATH ensures the Arm toolchain bin/
+    // wins over any STM32CubeCLT GNU tools that sit on the system PATH.
+    "terminal.integrated.env.windows": {
+        "ARM_TOOLCHAIN_DIR": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin",
+        "PATH": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin;${env:PATH}"
     },
 
     // ---- File hygiene -------------------------------------------------
