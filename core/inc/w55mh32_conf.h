@@ -3,7 +3,13 @@
  * @brief   Module selector for the W55MH32 Standard Peripheral Library.
  *
  * Vendor header w55mh32.h pulls this file in when USE_STDPERIPH_DRIVER
- * is defined. Uncomment a header below to enable the matching driver.
+ * is defined.
+ *
+ * All SPL peripheral headers are enabled below by default to match the source
+ * set in cmake/w55mh32/CMakeLists.txt. Comment out any driver you do not need.
+ * Drivers with external dependencies (e.g. w55mh32_wztoe.h requires
+ * wizchip_conf.h from WIZnet ioLibrary) are already active; add the
+ * dependency before building if you use them.
  */
 #ifndef __W55MH32_CONF_H
 #define __W55MH32_CONF_H
