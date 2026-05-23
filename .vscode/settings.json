@@ -1,0 +1,37 @@
+{
+    // ---- CMake Tools extension ----------------------------------------
+    // Force preset-driven configuration + Ninja so the CMake Tools UI
+    // calls into the same flow that `tasks.json` uses. Without this
+    // some third-party extensions (e.g. STM32-focused ones) replace the
+    // active cmake with a wrapper that ignores our presets.
+    "cmake.useCMakePresets": "always",
+    "cmake.generator": "Ninja",
+    "cmake.preferredGenerators": ["Ninja"],
+    "cmake.configureOnOpen": false,
+    "cmake.automaticReconfigure": false,
+
+    // Default cmake/ninja name; PATH-resolved at task time. If your PATH
+    // resolves these to a vendor wrapper (e.g. STM32CubeCLT's bundled
+    // cmake or any "cube-cmake.exe"-style shim), override them in
+    // ".vscode/settings.local.json" (already gitignored) with absolute
+    // paths, for example:
+    //   "cmake.cmakePath": "C:/Program Files/CMake/bin/cmake.exe",
+    //   "cmake.ninjaPath": "C:/Program Files/Ninja/ninja.exe"
+    "cmake.cmakePath": "cmake",
+    "cmake.ninjaPath": "ninja",
+
+    // ---- File hygiene -------------------------------------------------
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+
+    // ---- C / C++ basics ----------------------------------------------
+    "[c]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    "[cpp]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    }
+}
