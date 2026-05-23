@@ -44,7 +44,11 @@ target_link_options(${TARGET} PRIVATE
     -Wl,-Map=${CMAKE_BINARY_DIR}/${PROJECT_NAME}.map
     -Wl,--gc-sections
     --specs=nano.specs
-    --specs=nosys.specs
+    # --specs=nosys.specs intentionally omitted: syscalls.c + sysmem.c
+    # provide explicit weak stubs for _close/_lseek/_read/_write/_isatty/
+    # _fstat/_getpid/_kill/_exit/_sbrk. Pulling in libnosys here would
+    # supply strong duplicates that override _sbrk's heap/stack
+    # collision guard.
     # Cortex-M3 is bare-metal without an MMU, so the RAM LOAD segment is
     # legitimately RWX. GCC 12+ flags this even though the .data copy
     # pattern in startup_w55mh32.s makes it intentional — silence the

@@ -21,15 +21,27 @@ target_sources(w55mh32x_hal INTERFACE
     ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_rcc.c
     ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_gpio.c
 
-    # SPL — optional peripherals (uncomment per project needs)
-    # ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_adc.c
-    # ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_usart.c
-    # ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_spi.c
-    # ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_i2c.c
-    # ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_tim.c
-    # ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_dma.c
-    # ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_exti.c
-    # ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_flash.c
+    # SPL — optional peripherals
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_adc.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_bkp.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_can.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_crc.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_dac.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_dbgmcu.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_dma.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_exti.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_flash.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_i2c.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_iwdg.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_otp.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_pwr.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_rtc.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_sdio.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_spi.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_tim.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_trng.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_usart.c
+    ${CMAKE_SOURCE_DIR}/drivers/W55MH32X_Driver/src/w55mh32_wwdg.c
 )
 
 target_include_directories(w55mh32x_hal INTERFACE
