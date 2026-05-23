@@ -1,4 +1,4 @@
-# 빌드 출력물
+# Build outputs
 /build/
 /Debug/
 /Release/
@@ -7,59 +7,12 @@
 *.elf
 *.hex
 *.bin
+*.axf
 *.map
 *.lst
 *.list
 
-# IDE 설정 (SW4STM32, AC6, TrueSTUDIO, IAR, MDK-ARM 등)
-.cursor
-.cproject
-.clangd
-.project
-.atollic
-.dep/
-*.launch
-*.ewp
-*.ewd
-*.eww
-*.uvprojx
-*.uvoptx
-*.uvguix.*
-JLinkLog.txt
-JLinkSettings.ini
-c_cpp_properties.json
-
-# IAR
-*.ewd
-*.eww
-*.dep
-*.ewt
-*.wsdt
-*.dbgdt
-
-# Keil MDK
-*.uvguix.*
-*.uvopt
-*.uvoptx
-*.scvd
-*.lst
-.axf
-.lnp
-.htm
-
-# 임시 파일
-*.bak
-*.tmp
-*~
-*.swp
-*.orig
-nul
-
-# 종속성 관리자 및 기타
-.metadata/
-.history/
-
-# CMake - 모든 디렉토리에서 무시
+# CMake (ignored in any directory)
 **/CMakeCache.txt
 **/CMakeFiles/
 **/CMakeScripts/
@@ -70,30 +23,47 @@ nul
 **/CTestTestfile.cmake
 **/_deps/
 
-# Ninja 빌드 시스템 파일
+# Ninja build files
 .ninja_log
 .ninja_deps
 build.ninja
 rules.ninja
 
-# macOS 관련 파일
+# Editor / tool caches
+.cursor
+.clangd
+.history/
+.metadata/
+*.swp
+*~
+*.bak
+*.tmp
+*.orig
+
+# Claude Code workspace (user-local)
+.claude/
+
+# Local VS Code overrides (team-shared .vscode/ files are tracked)
+.vscode/*.local.json
+.vscode/settings.local.json
+
+# Debugger / probe logs
+JLinkLog.txt
+JLinkSettings.ini
+
+# OS-generated files (macOS / Windows)
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
-Thumbs.db
 .AppleDouble
-.LSOverride
 .AppleDB
 .AppleDesktop
+.LSOverride
+.apdisk
+ehthumbs.db
+Thumbs.db
 Network Trash Folder
 Temporary Items
-.apdisk
-
-# STM32CubeIDE
-.metadata/
-.launch/
-.settings/bundles-lock.store.json
-.settings/bundles.store.json
+nul
