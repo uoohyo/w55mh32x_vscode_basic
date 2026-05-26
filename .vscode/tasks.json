@@ -2,10 +2,43 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Clean (debug)",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "--preset", "debug", "--target", "clean"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": []
+        },
+        {
             "label": "CMake: configure (debug)",
             "type": "shell",
             "command": "cmake",
             "args": ["--preset", "debug"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build (debug)",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "--preset", "debug"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": { "kind": "build", "isDefault": true },
+            "dependsOn": ["CMake: configure (debug)"],
+            "dependsOrder": "sequence",
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "Clean and Build (debug)",
+            "dependsOn": ["Clean (debug)", "Build (debug)"],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean (release)",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "--preset", "release", "--target", "clean"],
             "options": { "cwd": "${workspaceFolder}" },
             "problemMatcher": []
         },
@@ -18,59 +51,20 @@
             "problemMatcher": []
         },
         {
-            "label": "Build (debug)",
-            "type": "shell",
-            "command": "cmake",
-            "args": ["--build", "--preset", "debug"],
-            "options": { "cwd": "${workspaceFolder}" },
-            "group": { "kind": "build", "isDefault": true },
-            "dependsOn": ["CMake: configure (debug)"],
-            "problemMatcher": ["$gcc"]
-        },
-        {
             "label": "Build (release)",
             "type": "shell",
             "command": "cmake",
             "args": ["--build", "--preset", "release"],
             "options": { "cwd": "${workspaceFolder}" },
-            "group": "build",
+            "group": { "kind": "build", "isDefault": true },
             "dependsOn": ["CMake: configure (release)"],
+            "dependsOrder": "sequence",
             "problemMatcher": ["$gcc"]
         },
         {
-            "label": "Clean (debug)",
-            "type": "shell",
-            "command": "cmake",
-            "args": ["--build", "--preset", "debug", "--target", "clean"],
-            "options": { "cwd": "${workspaceFolder}" },
-            "problemMatcher": []
-        },
-        {
-            "label": "Flash (J-Link)",
-            "type": "shell",
-            "command": "JLinkExe",
-            "args": [
-                "-device", "W55MH32",
-                "-if", "SWD",
-                "-speed", "4000",
-                "-autoconnect", "1",
-                "-CommanderScript", "${workspaceFolder}/.vscode/jlink-flash.jlink"
-            ],
-            "options": { "cwd": "${workspaceFolder}" },
-            "dependsOn": ["Build (debug)"],
-            "problemMatcher": []
-        },
-        {
-            "label": "Flash (OpenOCD)",
-            "type": "shell",
-            "command": "openocd",
-            "args": [
-                "-f", "interface/cmsis-dap.cfg",
-                "-f", "target/w55mh32.cfg",
-                "-c", "program build/debug/w55mh32x_vscode_basic.elf verify reset exit"
-            ],
-            "options": { "cwd": "${workspaceFolder}" },
-            "dependsOn": ["Build (debug)"],
+            "label": "Clean and Build (release)",
+            "dependsOn": ["Clean (release)", "Build (release)"],
+            "dependsOrder": "sequence",
             "problemMatcher": []
         }
     ]

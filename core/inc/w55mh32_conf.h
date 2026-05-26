@@ -1,23 +1,39 @@
 /**
- * @file    w55mh32_conf.h
- * @brief   Module selector for the W55MH32 Standard Peripheral Library.
+ ******************************************************************************
+ * @file           : w55mh32_conf.h
+ * @brief          : Module selector for the W55MH32 Standard Peripheral Library.
+ ******************************************************************************
+ * @attention
  *
- * Vendor header w55mh32.h pulls this file in when USE_STDPERIPH_DRIVER
- * is defined.
+ * Copyright (c) 2026 uoohyo
  *
- * All SPL peripheral headers are enabled below by default to match the source
- * set in cmake/w55mh32/CMakeLists.txt. Comment out any driver you do not need.
- * Drivers with external dependencies (e.g. w55mh32_wztoe.h requires
- * wizchip_conf.h from WIZnet ioLibrary) are already active; add the
- * dependency before building if you use them.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ ******************************************************************************
  */
+
+/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __W55MH32_CONF_H
 #define __W55MH32_CONF_H
 
-/* Always-on core peripherals */
+/* Includes ------------------------------------------------------------------*/
 #include "misc.h"
-
-/* Optional peripherals */
 #include "w55mh32_adc.h"
 #include "w55mh32_bkp.h"
 #include "w55mh32_can.h"
@@ -42,6 +58,7 @@
 #include "w55mh32_wwdg.h"
 #include "w55mh32_wztoe.h"
 
+/* Defines -------------------------------------------------------------------*/
 #ifdef USE_FULL_ASSERT
   #define assert_param(expr) \
       ((expr) ? (void)0U : assert_failed((uint8_t *)__FILE__, __LINE__))
