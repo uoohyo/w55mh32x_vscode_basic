@@ -3,6 +3,7 @@
     "configurations": [
         {
             "name": "Debug (pyOCD + WIZ-Link)",
+            "preLaunchTask": "Clean and Build (debug)",
             "cwd": "${workspaceFolder}",
             "type": "cortex-debug",
             "executable": "${command:cmake.launchTargetPath}",
@@ -20,6 +21,7 @@
         },
         {
             "name": "Debug (J-Link)",
+            "preLaunchTask": "Clean and Build (debug)",
             "cwd": "${workspaceFolder}",
             "type": "cortex-debug",
             "executable": "${command:cmake.launchTargetPath}",
