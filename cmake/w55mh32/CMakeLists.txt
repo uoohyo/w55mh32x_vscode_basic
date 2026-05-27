@@ -8,8 +8,9 @@ target_sources(w55mh32x_hal INTERFACE
     ${CMAKE_SOURCE_DIR}/core/src/system_w55mh32.c
 
     # core_cm3.c (V1.30, 2009) is intentionally NOT listed. The header
-    # core/inc/core_cm3.h is V3.20 (2013), and the V3.x CMSIS standard
-    # moved every NVIC/SCB/SysTick/intrinsic helper to "__STATIC_INLINE"
+    # drivers/CMSIS/Device/WIZnet/W55MH32X/inc/core_cm3.h is V3.20
+    # (2013), and the V3.x CMSIS standard moved every NVIC/SCB/SysTick/
+    # intrinsic helper to "__STATIC_INLINE"
     # in the header — the .c file is no longer expected at link time.
     # Building V1.30 .c against V3.20 .h also trips a GCC 12+ assembler
     # error on STREXB/STREXH (source = destination register). The file
