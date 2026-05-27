@@ -31,7 +31,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "w55mh32_it.h"
-#include "main.h"
 
 /* Typedef -------------------------------------------------------------------*/
 
@@ -126,14 +125,6 @@ void SysTick_Handler(void)
 {
     /* Increment a tick base here if one is added. */
 }
-
-/******************************************************************************/
-/* W55MH32 Peripheral Interrupt Handlers                                      */
-/* Empty defaults — fill the USER CODE blocks to handle each IRQ. The vector  */
-/* in startup_w55mh32.s aliases unimplemented entries to Default_Handler, so  */
-/* an unused stub here still serves as a strong override if the peripheral is */
-/* never enabled.                                                             */
-/******************************************************************************/
 
 /**
   * @brief This function handles WWDG interrupt.

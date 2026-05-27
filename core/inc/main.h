@@ -38,6 +38,9 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "w55mh32.h"
+#include "w55mh32_it.h"
+
+#include "system_w55mh32.h"
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
