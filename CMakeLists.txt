@@ -22,6 +22,7 @@ set(TARGET ${PROJECT_NAME}.elf)
 # always triggers a CMake reconfigure and nothing unintended sneaks in.
 set(CORE_SRC
     ${CMAKE_SOURCE_DIR}/core/src/main.c
+    ${CMAKE_SOURCE_DIR}/core/src/interrupt_vector_table.c  # C vector table + weak IRQ handlers
     ${CMAKE_SOURCE_DIR}/core/src/w55mh32_it.c
     ${CMAKE_SOURCE_DIR}/core/src/w55mh32_msp.c
     ${CMAKE_SOURCE_DIR}/core/src/syscalls.c   # newlib syscall stubs
