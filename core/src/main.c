@@ -39,7 +39,6 @@
 /* Variables -----------------------------------------------------------------*/
 
 /* Function prototypes -------------------------------------------------------*/
-static void SystemClock_Config(void);
 
 /* User code -----------------------------------------------------------------*/
 /**
@@ -48,11 +47,10 @@ static void SystemClock_Config(void);
  */
 int main(void)
 {
-    /* SystemInit() ran from startup_w55mh32.s before main() — clocks are
-     * already at the default configured in core/src/system_w55mh32.c.
-     * Override below if a different PLL/HSE setup is required.
-     */
-    SystemClock_Config();
+    /* Clock configuration: 72 MHz (HSE 8 MHz x PLL x9)
+     * Performed automatically by SystemInit() before main() via
+     * SetSysClockTo72() in system_w55mh32.c (line 639).
+     * No override needed — vendor clock setup is used as-is. */
 
     /* TODO: board / peripheral initialization. */
 
@@ -63,23 +61,14 @@ int main(void)
 }
 
 /**
- * @brief System Clock Configuration
- * @retval None
- */
-static void SystemClock_Config(void)
-{
-    /* Default: no override — rely on SystemInit() in system_w55mh32.c.
-     * Replace with a custom RCC configuration when needed.
-     */
-}
-
-/**
  * @brief  This function is executed in case of error occurrence.
  * @retval None
  */
 void Error_Handler(void)
 {
+    // Disable interrupts
     __disable_irq();
+
     while (1)
     {
         /* Halt for debugger inspection. */
