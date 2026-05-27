@@ -12,6 +12,23 @@ set(CMAKE_C_STANDARD   11)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
+# Define the build type
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Debug")
+endif()
+
+message("Build type: ${CMAKE_BUILD_TYPE}")
+
+# Set output directories for build artifacts to the build directory root
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+
+# Derive objcopy and size from the compiler path
+get_filename_component(ARM_TOOLCHAIN_DIR "${CMAKE_C_COMPILER}" DIRECTORY)
+set(CMAKE_OBJCOPY "${ARM_TOOLCHAIN_DIR}/arm-none-eabi-objcopy")
+set(CMAKE_SIZE   "${ARM_TOOLCHAIN_DIR}/arm-none-eabi-size")
+
 # MCU / SPL bundle exposed as an INTERFACE library.
 add_subdirectory(cmake/w55mh32)
 
