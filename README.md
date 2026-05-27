@@ -26,7 +26,7 @@ DSP libraries) untouched while application code lives under `core/`.
 | Tool | Version | Notes |
 | ---- | ------- | ----- |
 | `arm-none-eabi-gcc` | 10.3+ | C11 / C++17 capable |
-| CMake | 3.22+ | Required for `CMakePresets.json` v6 |
+| CMake | 3.25+ | Required for `CMakePresets.json` v6 |
 | Ninja | any recent | Used by all presets |
 | Visual Studio Code | latest | Workspace ships recommended extensions |
 | pyOCD + WIZ-Link | optional | For flashing/debugging (via `.vscode/launch.json`) |
