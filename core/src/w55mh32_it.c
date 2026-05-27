@@ -126,3 +126,641 @@ void SysTick_Handler(void)
 {
     /* Increment a tick base here if one is added. */
 }
+
+/******************************************************************************/
+/* W55MH32 Peripheral Interrupt Handlers                                      */
+/* Empty defaults — fill the USER CODE blocks to handle each IRQ. The vector  */
+/* in startup_w55mh32.s aliases unimplemented entries to Default_Handler, so  */
+/* an unused stub here still serves as a strong override if the peripheral is */
+/* never enabled.                                                             */
+/******************************************************************************/
+
+/**
+  * @brief This function handles WWDG interrupt.
+  * @param  None
+  * @retval None
+  */
+void WWDG_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles PVD through EXTI line detection interrupt.
+  * @param  None
+  * @retval None
+  */
+void PVD_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles Tamper interrupt.
+  * @param  None
+  * @retval None
+  */
+void TAMPER_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles RTC global interrupt.
+  * @param  None
+  * @retval None
+  */
+void RTC_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles FLASH global interrupt.
+  * @param  None
+  * @retval None
+  */
+void FLASH_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles RCC global interrupt.
+  * @param  None
+  * @retval None
+  */
+void RCC_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles EXTI Line0 interrupt.
+  * @param  None
+  * @retval None
+  */
+void EXTI0_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles EXTI Line1 interrupt.
+  * @param  None
+  * @retval None
+  */
+void EXTI1_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles EXTI Line2 interrupt.
+  * @param  None
+  * @retval None
+  */
+void EXTI2_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles EXTI Line3 interrupt.
+  * @param  None
+  * @retval None
+  */
+void EXTI3_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles EXTI Line4 interrupt.
+  * @param  None
+  * @retval None
+  */
+void EXTI4_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA1 Channel1 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void DMA1_Channel1_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA1 Channel2 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void DMA1_Channel2_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA1 Channel3 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void DMA1_Channel3_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA1 Channel4 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void DMA1_Channel4_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA1 Channel5 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void DMA1_Channel5_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA1 Channel6 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void DMA1_Channel6_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA1 Channel7 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void DMA1_Channel7_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles ADC1 and ADC2 global interrupts.
+  * @param  None
+  * @retval None
+  */
+void ADC1_2_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles USB High Priority or CAN1 TX interrupts.
+  * @param  None
+  * @retval None
+  */
+void USB_HP_CAN1_TX_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles USB Low Priority or CAN1 RX0 interrupts.
+  * @param  None
+  * @retval None
+  */
+void USB_LP_CAN1_RX0_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles CAN1 RX1 interrupt.
+  * @param  None
+  * @retval None
+  */
+void CAN1_RX1_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles CAN1 SCE interrupt.
+  * @param  None
+  * @retval None
+  */
+void CAN1_SCE_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles EXTI Line[9:5] interrupts.
+  * @param  None
+  * @retval None
+  */
+void EXTI9_5_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM1 Break or TIM9 global interrupts.
+  * @param  None
+  * @retval None
+  */
+void TIM1_BRK_TIM9_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM1 Update or TIM10 global interrupts.
+  * @param  None
+  * @retval None
+  */
+void TIM1_UP_TIM10_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM1 Trigger and Commutation or TIM11 global interrupts.
+  * @param  None
+  * @retval None
+  */
+void TIM1_TRG_COM_TIM11_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM1 Capture Compare interrupt.
+  * @param  None
+  * @retval None
+  */
+void TIM1_CC_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM2 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void TIM2_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM3 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void TIM3_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM4 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void TIM4_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles I2C1 Event interrupt.
+  * @param  None
+  * @retval None
+  */
+void I2C1_EV_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles I2C1 Error interrupt.
+  * @param  None
+  * @retval None
+  */
+void I2C1_ER_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles I2C2 Event interrupt.
+  * @param  None
+  * @retval None
+  */
+void I2C2_EV_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles I2C2 Error interrupt.
+  * @param  None
+  * @retval None
+  */
+void I2C2_ER_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles SPI1 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void SPI1_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles SPI2 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void SPI2_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles USART1 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void USART1_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles USART2 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void USART2_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles USART3 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void USART3_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles EXTI Line[15:10] interrupts.
+  * @param  None
+  * @retval None
+  */
+void EXTI15_10_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles RTC Alarm through EXTI line interrupt.
+  * @param  None
+  * @retval None
+  */
+void RTCAlarm_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles USB Wakeup from suspend through EXTI line interrupt.
+  * @param  None
+  * @retval None
+  */
+void USBWakeUp_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM8 Break or TIM12 global interrupts.
+  * @param  None
+  * @retval None
+  */
+void TIM8_BRK_TIM12_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM8 Update or TIM13 global interrupts.
+  * @param  None
+  * @retval None
+  */
+void TIM8_UP_TIM13_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM8 Trigger and Commutation or TIM14 global interrupts.
+  * @param  None
+  * @retval None
+  */
+void TIM8_TRG_COM_TIM14_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM8 Capture Compare interrupt.
+  * @param  None
+  * @retval None
+  */
+void TIM8_CC_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles ADC3 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void ADC3_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles FSMC global interrupt.
+  * @param  None
+  * @retval None
+  */
+void FSMC_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles SDIO global interrupt.
+  * @param  None
+  * @retval None
+  */
+void SDIO_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM5 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void TIM5_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles SPI3 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void SPI3_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles UART4 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void UART4_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles UART5 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void UART5_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM6 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void TIM6_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles TIM7 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void TIM7_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA2 Channel1 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void DMA2_Channel1_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA2 Channel2 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void DMA2_Channel2_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA2 Channel3 global interrupt.
+  * @param  None
+  * @retval None
+  */
+void DMA2_Channel3_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles DMA2 Channel4 and Channel5 global interrupts.
+  * @param  None
+  * @retval None
+  */
+void DMA2_Channel4_5_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles SYMC interrupt.
+  * @param  None
+  * @retval None
+  */
+void SYMC_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles RNG interrupt.
+  * @param  None
+  * @retval None
+  */
+void RNG_IRQHandler(void)
+{
+
+}
+
+/**
+  * @brief This function handles SENSOR interrupt.
+  * @param  None
+  * @retval None
+  */
+void SENSOR_IRQHandler(void)
+{
+
+}
