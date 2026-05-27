@@ -4,22 +4,22 @@
 
 /** @addtogroup w55mh32_system
   * @{
-  */  
-  
+  */
+
 
 #include "w55mh32.h"
 
 //#define SYSCLK_FREQ_HSE    HSE_VALUE
-//#define SYSCLK_FREQ_24MHz  24000000 
+//#define SYSCLK_FREQ_24MHz  24000000
 //#define SYSCLK_FREQ_36MHz  36000000
 //#define SYSCLK_FREQ_48MHz  48000000
 //#define SYSCLK_FREQ_56MHz  56000000
 #define SYSCLK_FREQ_72MHz  72000000
 
 /*!< Uncomment the following line if you need to relocate your vector Table in
-     Internal SRAM. */ 
+     Internal SRAM. */
 /* #define VECT_TAB_SRAM */
-#define VECT_TAB_OFFSET  0x0 /*!< Vector Table base offset field. 
+#define VECT_TAB_OFFSET  0x0 /*!< Vector Table base offset field.
                                   This value must be a multiple of 0x200. */
 
 
@@ -78,13 +78,13 @@ static void SetSysClock(void);
 #elif defined SYSCLK_FREQ_48MHz
   static void SetSysClockTo48(void);
 #elif defined SYSCLK_FREQ_56MHz
-  static void SetSysClockTo56(void);  
+  static void SetSysClockTo56(void);
 #elif defined SYSCLK_FREQ_72MHz
   static void SetSysClockTo72(void);
 #endif
 
 #ifdef DATA_IN_ExtSRAM
-  static void SystemInit_ExtMemCtl(void); 
+  static void SystemInit_ExtMemCtl(void);
 #endif /* DATA_IN_ExtSRAM */
 
 /**
@@ -97,7 +97,7 @@ static void SetSysClock(void);
 
 /**
   * @brief  Setup the microcontroller system
-  *         Initialize the Embedded Flash Interface, the PLL and update the 
+  *         Initialize the Embedded Flash Interface, the PLL and update the
   *         SystemCoreClock variable.
   * @note   This function should be used only after reset.
   * @param  None
@@ -110,8 +110,8 @@ void SystemInit (void)
   RCC->CR |= (uint32_t)0x00000001;
 
   /* Reset SW, HPRE, PPRE1, PPRE2, ADCPRE and MCO bits */
-  RCC->CFGR &= (uint32_t)0xF8FF0000; 
-  
+  RCC->CFGR &= (uint32_t)0xF8FF0000;
+
   /* Reset HSEON, CSSON and PLLON bits */
   RCC->CR &= (uint32_t)0xFEF6FFFF;
 
@@ -123,7 +123,7 @@ void SystemInit (void)
 
   /* Disable all interrupts and clear pending bits  */
   RCC->CIR = 0x009F0000;
-	
+
   /* Configure the System clock frequency, HCLK, PCLK2 and PCLK1 prescalers */
   /* Configure the Flash Latency cycles and enable prefetch buffer */
   SetSysClock();
@@ -132,7 +132,7 @@ void SystemInit (void)
   SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM. */
 #else
   SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH. */
-#endif 
+#endif
 }
 
 /**
@@ -140,31 +140,31 @@ void SystemInit (void)
   *         The SystemCoreClock variable contains the core clock (HCLK), it can
   *         be used by the user application to setup the SysTick timer or configure
   *         other parameters.
-  *           
+  *
   * @note   Each time the core clock (HCLK) changes, this function must be called
   *         to update SystemCoreClock variable value. Otherwise, any configuration
-  *         based on this variable will be incorrect.         
-  *     
-  * @note   - The system frequency computed by this function is not the real 
-  *           frequency in the chip. It is calculated based on the predefined 
+  *         based on this variable will be incorrect.
+  *
+  * @note   - The system frequency computed by this function is not the real
+  *           frequency in the chip. It is calculated based on the predefined
   *           constant and the selected clock source:
-  *             
+  *
   *           - If SYSCLK source is HSI, SystemCoreClock will contain the HSI_VALUE(*)
-  *                                              
+  *
   *           - If SYSCLK source is HSE, SystemCoreClock will contain the HSE_VALUE(**)
-  *                          
-  *           - If SYSCLK source is PLL, SystemCoreClock will contain the HSE_VALUE(**) 
+  *
+  *           - If SYSCLK source is PLL, SystemCoreClock will contain the HSE_VALUE(**)
   *             or HSI_VALUE(*) multiplied by the PLL factors.
-  *         
+  *
   *         (*) HSI_VALUE is a constant defined in mhf1xx.h file (default value
   *             8 MHz) but the real value may vary depending on the variations
-  *             in voltage and temperature.   
-  *    
+  *             in voltage and temperature.
+  *
   *         (**) HSE_VALUE is a constant defined in mhf1xx.h file (default value
   *              8 MHz or 25 MHz, depedning on the product used), user has to ensure
   *              that HSE_VALUE is same as the real frequency of the crystal used.
   *              Otherwise, this function may have wrong result.
-  *                
+  *
   *         - The result of this function could be not correct when using fractional
   *           value for HSE crystal.
   * @param  None
@@ -173,10 +173,10 @@ void SystemInit (void)
 void SystemCoreClockUpdate (void)
 {
   uint32_t tmp = 0, pllmull = 0, pllsource = 0;
-    
+
   /* Get SYSCLK source -------------------------------------------------------*/
   tmp = RCC->CFGR & RCC_CFGR_SWS;
-  
+
   switch (tmp)
   {
     case 0x00:  /* HSI used as system clock */
@@ -190,7 +190,7 @@ void SystemCoreClockUpdate (void)
       /* Get PLL clock source and multiplication factor ----------------------*/
       pllmull = RCC->CFGR & RCC_CFGR_PLLMULL;
       pllsource = RCC->CFGR & RCC_CFGR_PLLSRC;
-          
+
 	  if(RCC->CFGR & RCC_CFGR_PLLMULL_4)
 	  {
 		pllmull = ( pllmull >> 18) + 17;
@@ -199,7 +199,7 @@ void SystemCoreClockUpdate (void)
 	  {
 		pllmull = ( pllmull >> 18) + 2;
 	  }
-      
+
       if (pllsource == 0x00)
       {
         /* HSI oscillator clock divided by 2 selected as PLL clock entry */
@@ -224,12 +224,12 @@ void SystemCoreClockUpdate (void)
       SystemCoreClock = HSI_VALUE;
       break;
   }
-  
+
   /* Compute HCLK clock frequency ----------------*/
   /* Get HCLK prescaler */
   tmp = AHBPrescTable[((RCC->CFGR & RCC_CFGR_HPRE) >> 4)];
   /* HCLK clock frequency */
-  SystemCoreClock >>= tmp;  
+  SystemCoreClock >>= tmp;
 }
 
 /**
@@ -248,13 +248,13 @@ static void SetSysClock(void)
 #elif defined SYSCLK_FREQ_48MHz
   SetSysClockTo48();
 #elif defined SYSCLK_FREQ_56MHz
-  SetSysClockTo56();  
+  SetSysClockTo56();
 #elif defined SYSCLK_FREQ_72MHz
   SetSysClockTo72();
 #endif
- 
+
  /* If none of the define above is enabled, the HSI is used as System clock
-    source (default after reset) */ 
+    source (default after reset) */
 }
 
 #ifdef SYSCLK_FREQ_HSE
@@ -268,16 +268,16 @@ static void SetSysClock(void)
 static void SetSysClockToHSE(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
-  
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/    
-  /* Enable HSE */    
+
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/
+  /* Enable HSE */
   RCC->CR |= ((uint32_t)RCC_CR_HSEON);
- 
+
   /* Wait till HSE is ready and if Time out is reached exit */
   do
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
-    StartUpCounter++;  
+    StartUpCounter++;
   } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
@@ -287,7 +287,7 @@ static void SetSysClockToHSE(void)
   else
   {
     HSEStatus = (uint32_t)0x00;
-  }  
+  }
 
   if (HSEStatus == (uint32_t)0x01)
   {
@@ -301,16 +301,16 @@ static void SetSysClockToHSE(void)
 
     /* HCLK = SYSCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_HPRE_DIV1;
-      
+
     /* PCLK2 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE2_DIV1;
-    
+
     /* PCLK1 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE1_DIV1;
-    
+
     /* Select HSE as system clock source */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
-    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_HSE;    
+    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_HSE;
 
     /* Wait till HSE is used as system clock source */
     while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) != (uint32_t)0x04)
@@ -318,13 +318,13 @@ static void SetSysClockToHSE(void)
     }
   }
   else
-  { /* If HSE fails to start-up, the application will have wrong clock 
+  { /* If HSE fails to start-up, the application will have wrong clock
          configuration. User can add here some code to deal with this error */
-  }  
+  }
 }
 #elif defined SYSCLK_FREQ_24MHz
 /**
-  * @brief  Sets System clock frequency to 24MHz and configure HCLK, PCLK2 
+  * @brief  Sets System clock frequency to 24MHz and configure HCLK, PCLK2
   *          and PCLK1 prescalers.
   * @note   This function should be used only after reset.
   * @param  None
@@ -333,16 +333,16 @@ static void SetSysClockToHSE(void)
 static void SetSysClockTo24(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
-  
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/    
-  /* Enable HSE */    
+
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/
+  /* Enable HSE */
   RCC->CR |= ((uint32_t)RCC_CR_HSEON);
- 
+
   /* Wait till HSE is ready and if Time out is reached exit */
   do
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
-    StartUpCounter++;  
+    StartUpCounter++;
   } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
@@ -352,7 +352,7 @@ static void SetSysClockTo24(void)
   else
   {
     HSEStatus = (uint32_t)0x00;
-  }  
+  }
 
   if (HSEStatus == (uint32_t)0x01)
   {
@@ -361,17 +361,17 @@ static void SetSysClockTo24(void)
 
     /* Flash 0 wait state */
     FLASH->ACR &= (uint32_t)((uint32_t)~FLASH_ACR_LATENCY);
-    FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_0;    
- 
+    FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_0;
+
     /* HCLK = SYSCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_HPRE_DIV1;
-      
+
     /* PCLK2 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE2_DIV1;
-    
+
     /* PCLK1 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE1_DIV1;
-    
+
     /*  PLL configuration:  = (HSE / 2) * 6 = 24 MHz */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL));
     RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSE | RCC_CFGR_PLLXTPRE_HSE_Div2 | RCC_CFGR_PLLMULL6);
@@ -386,7 +386,7 @@ static void SetSysClockTo24(void)
 
     /* Select PLL as system clock source */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
-    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;    
+    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;
 
     /* Wait till PLL is used as system clock source */
     while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) != (uint32_t)0x08)
@@ -394,14 +394,14 @@ static void SetSysClockTo24(void)
     }
   }
   else
-  { /* If HSE fails to start-up, the application will have wrong clock 
+  { /* If HSE fails to start-up, the application will have wrong clock
          configuration. User can add here some code to deal with this error */
-  } 
+  }
 }
 #elif defined SYSCLK_FREQ_36MHz
 /**
-  * @brief  Sets System clock frequency to 36MHz and configure HCLK, PCLK2 
-  *          and PCLK1 prescalers. 
+  * @brief  Sets System clock frequency to 36MHz and configure HCLK, PCLK2
+  *          and PCLK1 prescalers.
   * @note   This function should be used only after reset.
   * @param  None
   * @retval None
@@ -409,16 +409,16 @@ static void SetSysClockTo24(void)
 static void SetSysClockTo36(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
-  
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/    
-  /* Enable HSE */    
+
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/
+  /* Enable HSE */
   RCC->CR |= ((uint32_t)RCC_CR_HSEON);
- 
+
   /* Wait till HSE is ready and if Time out is reached exit */
   do
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
-    StartUpCounter++;  
+    StartUpCounter++;
   } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
@@ -428,7 +428,7 @@ static void SetSysClockTo36(void)
   else
   {
     HSEStatus = (uint32_t)0x00;
-  }  
+  }
 
   if (HSEStatus == (uint32_t)0x01)
   {
@@ -437,17 +437,17 @@ static void SetSysClockTo36(void)
 
     /* Flash 1 wait state */
     FLASH->ACR &= (uint32_t)((uint32_t)~FLASH_ACR_LATENCY);
-    FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_1;    
- 
+    FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_1;
+
     /* HCLK = SYSCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_HPRE_DIV1;
-      
+
     /* PCLK2 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE2_DIV1;
-    
+
     /* PCLK1 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE1_DIV1;
-       
+
     /*  PLL configuration: PLLCLK = (HSE / 2) * 9 = 36 MHz */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL));
     RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSE | RCC_CFGR_PLLXTPRE_HSE_Div2 | RCC_CFGR_PLLMULL9);
@@ -462,7 +462,7 @@ static void SetSysClockTo36(void)
 
     /* Select PLL as system clock source */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
-    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;    
+    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;
 
     /* Wait till PLL is used as system clock source */
     while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) != (uint32_t)0x08)
@@ -470,14 +470,14 @@ static void SetSysClockTo36(void)
     }
   }
   else
-  { /* If HSE fails to start-up, the application will have wrong clock 
+  { /* If HSE fails to start-up, the application will have wrong clock
          configuration. User can add here some code to deal with this error */
-  } 
+  }
 }
 #elif defined SYSCLK_FREQ_48MHz
 /**
-  * @brief  Sets System clock frequency to 48MHz and configure HCLK, PCLK2 
-  *          and PCLK1 prescalers. 
+  * @brief  Sets System clock frequency to 48MHz and configure HCLK, PCLK2
+  *          and PCLK1 prescalers.
   * @note   This function should be used only after reset.
   * @param  None
   * @retval None
@@ -485,16 +485,16 @@ static void SetSysClockTo36(void)
 static void SetSysClockTo48(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
-  
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/    
-  /* Enable HSE */    
+
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/
+  /* Enable HSE */
   RCC->CR |= ((uint32_t)RCC_CR_HSEON);
- 
+
   /* Wait till HSE is ready and if Time out is reached exit */
   do
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
-    StartUpCounter++;  
+    StartUpCounter++;
   } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
@@ -504,7 +504,7 @@ static void SetSysClockTo48(void)
   else
   {
     HSEStatus = (uint32_t)0x00;
-  }  
+  }
 
   if (HSEStatus == (uint32_t)0x01)
   {
@@ -513,17 +513,17 @@ static void SetSysClockTo48(void)
 
     /* Flash 1 wait state */
     FLASH->ACR &= (uint32_t)((uint32_t)~FLASH_ACR_LATENCY);
-    FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_1;    
- 
+    FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_1;
+
     /* HCLK = SYSCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_HPRE_DIV1;
-      
+
     /* PCLK2 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE2_DIV1;
-    
+
     /* PCLK1 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE1_DIV2;
-    
+
     /*  PLL configuration: PLLCLK = HSE * 6 = 48 MHz */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL));
     RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSE | RCC_CFGR_PLLMULL6);
@@ -538,7 +538,7 @@ static void SetSysClockTo48(void)
 
     /* Select PLL as system clock source */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
-    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;    
+    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;
 
     /* Wait till PLL is used as system clock source */
     while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) != (uint32_t)0x08)
@@ -546,15 +546,15 @@ static void SetSysClockTo48(void)
     }
   }
   else
-  { /* If HSE fails to start-up, the application will have wrong clock 
+  { /* If HSE fails to start-up, the application will have wrong clock
          configuration. User can add here some code to deal with this error */
-  } 
+  }
 }
 
 #elif defined SYSCLK_FREQ_56MHz
 /**
-  * @brief  Sets System clock frequency to 56MHz and configure HCLK, PCLK2 
-  *          and PCLK1 prescalers. 
+  * @brief  Sets System clock frequency to 56MHz and configure HCLK, PCLK2
+  *          and PCLK1 prescalers.
   * @note   This function should be used only after reset.
   * @param  None
   * @retval None
@@ -562,16 +562,16 @@ static void SetSysClockTo48(void)
 static void SetSysClockTo56(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
-  
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/   
-  /* Enable HSE */    
+
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/
+  /* Enable HSE */
   RCC->CR |= ((uint32_t)RCC_CR_HSEON);
- 
+
   /* Wait till HSE is ready and if Time out is reached exit */
   do
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
-    StartUpCounter++;  
+    StartUpCounter++;
   } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
@@ -581,7 +581,7 @@ static void SetSysClockTo56(void)
   else
   {
     HSEStatus = (uint32_t)0x00;
-  }  
+  }
 
   if (HSEStatus == (uint32_t)0x01)
   {
@@ -590,14 +590,14 @@ static void SetSysClockTo56(void)
 
     /* Flash 2 wait state */
     FLASH->ACR &= (uint32_t)((uint32_t)~FLASH_ACR_LATENCY);
-    FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_2;    
- 
+    FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_2;
+
     /* HCLK = SYSCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_HPRE_DIV1;
-      
+
     /* PCLK2 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE2_DIV1;
-    
+
     /* PCLK1 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE1_DIV2;
 
@@ -615,7 +615,7 @@ static void SetSysClockTo56(void)
 
     /* Select PLL as system clock source */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
-    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;    
+    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;
 
     /* Wait till PLL is used as system clock source */
     while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) != (uint32_t)0x08)
@@ -623,15 +623,15 @@ static void SetSysClockTo56(void)
     }
   }
   else
-  { /* If HSE fails to start-up, the application will have wrong clock 
+  { /* If HSE fails to start-up, the application will have wrong clock
          configuration. User can add here some code to deal with this error */
-  } 
+  }
 }
 
 #elif defined SYSCLK_FREQ_72MHz
 /**
-  * @brief  Sets System clock frequency to 72MHz and configure HCLK, PCLK2 
-  *          and PCLK1 prescalers. 
+  * @brief  Sets System clock frequency to 72MHz and configure HCLK, PCLK2
+  *          and PCLK1 prescalers.
   * @note   This function should be used only after reset.
   * @param  None
   * @retval None
@@ -639,16 +639,16 @@ static void SetSysClockTo56(void)
 static void SetSysClockTo72(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
-  
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/    
-  /* Enable HSE */    
+
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/
+  /* Enable HSE */
   RCC->CR |= ((uint32_t)RCC_CR_HSEON);
- 
+
   /* Wait till HSE is ready and if Time out is reached exit */
   do
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
-    StartUpCounter++;  
+    StartUpCounter++;
   } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
@@ -658,7 +658,7 @@ static void SetSysClockTo72(void)
   else
   {
     HSEStatus = (uint32_t)0x00;
-  }  
+  }
 
   if (HSEStatus == (uint32_t)0x01)
   {
@@ -667,15 +667,15 @@ static void SetSysClockTo72(void)
 
     /* Flash 2 wait state */
     FLASH->ACR &= (uint32_t)((uint32_t)~FLASH_ACR_LATENCY);
-    FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_2;    
+    FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_2;
 
- 
+
     /* HCLK = SYSCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_HPRE_DIV1;
-      
+
     /* PCLK2 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE2_DIV1;
-    
+
     /* PCLK1 = HCLK */
     RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE1_DIV2;
 
@@ -691,10 +691,10 @@ static void SetSysClockTo72(void)
     while((RCC->CR & RCC_CR_PLLRDY) == 0)
     {
     }
-    
+
     /* Select PLL as system clock source */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
-    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;    
+    RCC->CFGR |= (uint32_t)RCC_CFGR_SW_PLL;
 
     /* Wait till PLL is used as system clock source */
     while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) != (uint32_t)0x08)
@@ -702,7 +702,7 @@ static void SetSysClockTo72(void)
     }
   }
   else
-  { /* If HSE fails to start-up, the application will have wrong clock 
+  { /* If HSE fails to start-up, the application will have wrong clock
          configuration. User can add here some code to deal with this error */
   }
 }
@@ -715,8 +715,8 @@ static void SetSysClockTo72(void)
 /**
   * @}
   */
-  
+
 /**
   * @}
-  */    
+  */
 /******************* (C) COPYRIGHT  2024  WIZnet *****END OF FILE****/
