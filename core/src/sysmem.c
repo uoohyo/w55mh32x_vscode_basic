@@ -1,25 +1,56 @@
 /**
- * @file sysmem.c
- * @brief Newlib heap (_sbrk) implementation for bare-metal W55MH32.
+ ******************************************************************************
+ * @file           : sysmem.c
+ * @brief          : Newlib heap (_sbrk) implementation for bare-metal W55MH32.
+ *                   The heap grows upward from the end of .bss (_end) toward the bottom of
+ *                   the stack region. The linker script w55mh32x_flash.ld defines:
+ *                      - _end / end       : first byte after .bss (PROVIDE)
+ *                      - _estack          : top of RAM (== ORIGIN(RAM) + LENGTH(RAM))
+ *                      - _Min_Heap_Size   : reserved heap (0x2000 = 8 KB by default)
+ *                   A collision check prevents the heap from growing past
+ *                   (_estack - _Min_Heap_Size), which is the lowest address the stack
+ *                   may legitimately reach.
+ ******************************************************************************
+ * @attention
  *
- * The heap grows upward from the end of .bss (_end) toward the bottom of
- * the stack region. The linker script w55mh32x_flash.ld defines:
- *   - _end / end       : first byte after .bss (PROVIDE)
- *   - _estack          : top of RAM (== ORIGIN(RAM) + LENGTH(RAM))
- *   - _Min_Heap_Size   : reserved heap (0x2000 = 8 KB by default)
- * A collision check prevents the heap from growing past
- * (_estack - _Min_Heap_Size), which is the lowest address the stack
- * may legitimately reach.
+ * Copyright (c) 2026 uoohyo
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ ******************************************************************************
  */
+
+/* Includes ------------------------------------------------------------------*/
 #include <errno.h>
 #include <stdint.h>
 #include <stddef.h>
 
-/* Symbols defined by the linker script. */
+/* Typedef -------------------------------------------------------------------*/
+
+/* Define --------------------------------------------------------------------*/
+
+/* Variables -----------------------------------------------------------------*/
 extern char _end;          /* first byte after .bss  */
 extern char _estack;       /* top of the stack region */
 extern uint32_t _Min_Heap_Size; /* minimum required heap */
 
+/* Function -----------------------------------------------------------------*/
 /**
  * @brief Newlib heap allocator backend. Bumps the heap break by @p incr
  *        bytes and returns the previous break (i.e. the start address of
