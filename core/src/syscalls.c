@@ -1,19 +1,51 @@
 /**
- * @file syscalls.c
- * @brief Newlib syscall stubs for bare-metal W55MH32 (Cortex-M3).
+ ******************************************************************************
+ * @file           : syscalls.c
+ * @brief          : Newlib syscall stubs for bare-metal W55MH32 (Cortex-M3).
+ *                   These are minimal stub implementations that satisfy the newlib linker
+ *                   without pulling in OS-specific code. All I/O stubs return ENOSYS; only
+ *                   the stubs required to silence newlib-nano link warnings are provided.
+ *                   Override any stub by providing a non-weak definition in your application.
+ ******************************************************************************
+ * @attention
  *
- * These are minimal stub implementations that satisfy the newlib linker
- * without pulling in OS-specific code. All I/O stubs return ENOSYS; only
- * the stubs required to silence newlib-nano link warnings are provided.
- * Override any stub by providing a non-weak definition in your application.
+ * Copyright (c) 2026 uoohyo
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ ******************************************************************************
  */
+
+/* Includes ------------------------------------------------------------------*/
 #include <errno.h>
 #include <sys/stat.h>
 
+/* Typedef -------------------------------------------------------------------*/
+
+/* Define --------------------------------------------------------------------*/
+
+/* Variables -----------------------------------------------------------------*/
 /* newlib declares errno as an extern; we must expose it here. */
 #undef errno
 extern int errno;
 
+/* Function -----------------------------------------------------------------*/
 /**
  * @brief Stub for close(): there is no filesystem, so closing any
  *        descriptor always fails with ENOSYS.
