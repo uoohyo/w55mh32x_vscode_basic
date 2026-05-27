@@ -47,8 +47,6 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
-
-/* Peripheral IRQ handler prototypes */
 void WWDG_IRQHandler(void);
 void PVD_IRQHandler(void);
 void TAMPER_IRQHandler(void);

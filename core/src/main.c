@@ -30,7 +30,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "w55mh32_it.h"
 
 /* Typedef -------------------------------------------------------------------*/
 
@@ -47,12 +46,9 @@
  */
 int main(void)
 {
-    /* Clock configuration: 72 MHz (HSE 8 MHz x PLL x9)
-     * Performed automatically by SystemInit() before main() via
-     * SetSysClockTo72() in system_w55mh32.c (line 639).
-     * No override needed — vendor clock setup is used as-is. */
-
+    __disable_irq();
     /* TODO: board / peripheral initialization. */
+    __enable_irq();
 
     while (1)
     {
@@ -66,7 +62,7 @@ int main(void)
  */
 void Error_Handler(void)
 {
-    // Disable interrupts
+    /* Disable interrupts */
     __disable_irq();
 
     while (1)
