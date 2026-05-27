@@ -29,7 +29,7 @@ DSP libraries) untouched while application code lives under `core/`.
 | CMake | 3.22+ | Required for `CMakePresets.json` v6 |
 | Ninja | any recent | Used by all presets |
 | Visual Studio Code | latest | Workspace ships recommended extensions |
-| J-Link or OpenOCD + CMSIS-DAP | optional | For flashing/debugging |
+| pyOCD + WIZ-Link | optional | For flashing/debugging (via `.vscode/launch.json`) |
 
 Recommended VS Code extensions are pulled in automatically from
 `.vscode/extensions.json` (Cortex-Debug, CMake Tools, C/C++ IntelliSense,
@@ -81,8 +81,10 @@ cmake --build --preset debug
 Swap `debug` for `release` to get an optimized build.
 
 Inside VS Code, hit `Ctrl+Shift+B` to run the default **Build (debug)**
-task, or pick **Flash (J-Link)** / **Flash (OpenOCD)** from the task
-list to program the target.
+task. Additional **CMake: configure** and **Clean** tasks are available
+from the task list. Flashing and debugging are driven by the
+Cortex-Debug launch configurations in `.vscode/launch.json` (pyOCD +
+WIZ-Link).
 
 ## MCU Info
 
