@@ -80,6 +80,30 @@ cmake --build --preset debug
 
 Swap `debug` for `release` to get an optimized build.
 
+### Local toolchain path
+
+`CMakePresets.json` is machine-agnostic and contains no local paths. If
+`arm-none-eabi-gcc` is **not** on your `PATH`, copy the template and point
+`ARM_TOOLCHAIN_DIR` at the directory holding the toolchain executables:
+
+```bash
+cp CMakeUserPresets.json.example CMakeUserPresets.json
+```
+
+Then edit `CMakeUserPresets.json`:
+
+- **Windows**: keep the `toolchain-windows` inherit and adjust the path.
+- **Linux**: change `dev-debug` / `dev-release` to inherit `toolchain-linux`
+  instead of `toolchain-windows`, then adjust the path.
+
+`CMakeUserPresets.json` is gitignored, so machine-specific paths never reach
+the shared repo. Configure and build with the developer presets:
+
+```bash
+cmake --preset dev-debug
+cmake --build --preset dev-debug
+```
+
 Inside VS Code, hit `Ctrl+Shift+B` to run the default **Build (debug)**
 task. Additional **CMake: configure** and **Clean** tasks are available
 from the task list. Flashing and debugging are driven by the
