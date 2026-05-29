@@ -10,12 +10,13 @@
             "cacheVariables": {
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "TRUE",
 
-                // ARM_TOOLCHAIN_DIR: absolute path to the folder that contains
-                // arm-none-eabi-gcc (the toolchain "bin/" directory). Replace the
-                // value below with your own install path. If the toolchain is
-                // already on your PATH, you may delete this line.
-                // NOTE: comments are NOT valid in CMakeUserPresets.json — strip
-                // every "// ..." line after copying this file (see README).
+                // ARM_TOOLCHAIN_DIR: ARM GCC 툴체인 bin 디렉토리 절대 경로.
+                // Windows 예시: "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin"
+                // Linux 예시:   "/usr/bin" 또는 "/opt/arm-gnu-toolchain/bin"
+                // arm-none-eabi-gcc 실행 파일이 들어 있는 디렉토리를 지정하세요.
+                // 툴체인이 이미 PATH에 있으면 이 줄을 지워도 됩니다.
+                // 복사 후 실제 경로로 수정하세요. cmake CLI는 주석을 허용하지만
+                // VS Code CMake Tools 확장(1.8+)은 주석을 거부하므로 이 // 줄들은 제거하세요.
                 "ARM_TOOLCHAIN_DIR": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin"
             }
         },
