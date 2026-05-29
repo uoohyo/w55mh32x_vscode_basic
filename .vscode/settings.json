@@ -16,9 +16,7 @@
     // ".vscode/settings.local.json" (already gitignored) with absolute
     // paths, for example:
     //   "cmake.cmakePath": "C:/Program Files/CMake/bin/cmake.exe",
-    //   "cmake.ninjaPath": "C:/Program Files/Ninja/ninja.exe"
     "cmake.cmakePath": "C:/Program Files/CMake/bin/cmake.exe",
-    "cmake.ninjaPath": "ninja",
 
     // cmake-tools ignores "cmake.configureSettings" when
     // "cmake.useCMakePresets" is "always" (see the extension docs). The
