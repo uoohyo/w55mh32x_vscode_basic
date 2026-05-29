@@ -26,7 +26,7 @@ DSP libraries) untouched while application code lives under `core/`.
 | Tool | Version | Notes |
 | ---- | ------- | ----- |
 | `arm-none-eabi-gcc` | 10.3+ | C11 / C++17 capable |
-| CMake | 3.25+ | Required for `CMakePresets.json` v6 |
+| CMake | 3.25+ | Required for `CMakeUserPresets.json` preset schema v6 |
 | Ninja | any recent | Used by all presets |
 | Visual Studio Code | latest | Workspace ships recommended extensions |
 | pyOCD + WIZ-Link | optional | For flashing/debugging (via `.vscode/launch.json`) |
@@ -40,7 +40,7 @@ ARM syntax, linker script highlighting).
 ```text
 .
 ├── CMakeLists.txt              Root project + executable target
-├── CMakePresets.json           Debug / Release presets (Ninja)
+├── CMakeUserPresets.json.example  Preset template → copy to CMakeUserPresets.json
 ├── cmake/
 │   ├── gcc-arm-none-eabi.cmake Toolchain (cortex-m3, soft FP)
 │   └── w55mh32/
@@ -66,13 +66,17 @@ ARM syntax, linker script highlighting).
 git clone https://github.com/uoohyo/w55mh32x_vscode_basic.git
 cd w55mh32x_vscode_basic
 
-# 2. Configure (Debug)
+# 2. Create your local presets (REQUIRED — see "Local presets" below)
+cp CMakeUserPresets.json.example CMakeUserPresets.json
+#    then edit ARM_TOOLCHAIN_DIR and strip the // comment lines
+
+# 3. Configure (Debug)
 cmake --preset debug
 
-# 3. Build
+# 4. Build
 cmake --build --preset debug
 
-# 4. Output
+# 5. Output
 #    build/debug/w55mh32x_vscode_basic.elf
 #    build/debug/w55mh32x_vscode_basic.hex
 #    build/debug/w55mh32x_vscode_basic.bin
@@ -80,11 +84,13 @@ cmake --build --preset debug
 
 Swap `debug` for `release` to get an optimized build.
 
-### Local toolchain path
+### Local presets (required)
 
-`CMakePresets.json` is machine-agnostic and contains no local paths. If
-`arm-none-eabi-gcc` is **not** on your `PATH`, copy the template and point
-`ARM_TOOLCHAIN_DIR` at the directory holding the toolchain executables:
+The build presets (`debug` / `release`) live in `CMakeUserPresets.json`,
+which is **gitignored** so machine-specific toolchain paths never reach the
+shared repo. A fresh clone has no `CMakeUserPresets.json`, so you must create
+one from the template before configuring — otherwise CMake reports a missing
+preset:
 
 ```bash
 cp CMakeUserPresets.json.example CMakeUserPresets.json
@@ -92,22 +98,14 @@ cp CMakeUserPresets.json.example CMakeUserPresets.json
 
 Then edit `CMakeUserPresets.json`:
 
-- **Windows**: keep the `toolchain-windows` inherit and adjust the path.
-- **Linux**: change `dev-debug` / `dev-release` to inherit `toolchain-linux`
-  instead of `toolchain-windows`, then adjust the path.
+1. Set `ARM_TOOLCHAIN_DIR` to your own `arm-none-eabi-gcc` `bin/` directory,
+   or delete the line if the toolchain is already on your `PATH`.
+2. Remove every `// ...` comment line — comments are not valid JSON, and
+   CMake fails to parse the file if they remain.
 
-Set the path to your own toolchain `bin/` directory. With
-`cmake.useCMakePresets` enabled, the VS Code CMake Tools extension picks up
-this `ARM_TOOLCHAIN_DIR` automatically when you select the `dev-debug` /
-`dev-release` preset.
-
-`CMakeUserPresets.json` is gitignored, so machine-specific paths never reach
-the shared repo. Configure and build with the developer presets:
-
-```bash
-cmake --preset dev-debug
-cmake --build --preset dev-debug
-```
+With `cmake.useCMakePresets` enabled, the VS Code CMake Tools extension picks
+up `ARM_TOOLCHAIN_DIR` automatically when you select the `debug` / `release`
+preset.
 
 Inside VS Code, hit `Ctrl+Shift+B` to run the default **Build (debug)**
 task. Additional **CMake: configure** and **Clean** tasks are available
@@ -115,11 +113,10 @@ from the task list. Flashing and debugging are driven by the
 Cortex-Debug launch configurations in `.vscode/launch.json` (pyOCD +
 WIZ-Link).
 
-> **Note:** The `Ctrl+Shift+B` build tasks use the shared `debug` / `release`
-> presets, which do **not** carry `ARM_TOOLCHAIN_DIR`, so they require
-> `arm-none-eabi-gcc` on your system `PATH`. If your toolchain is not on `PATH`,
-> use the CMake Tools GUI (select `dev-debug` / `dev-release`) or run
-> `cmake --build --preset dev-debug` directly.
+> **Note:** All build presets (`debug` / `release`) live in
+> `CMakeUserPresets.json`. A fresh clone has none, so create it first (see
+> **Local presets** above) — otherwise `Ctrl+Shift+B`, the CMake Tools GUI,
+> and `cmake --preset ...` all fail with a missing-preset error.
 
 ## MCU Info
 
