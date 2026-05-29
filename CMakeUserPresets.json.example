@@ -3,32 +3,35 @@
     "cmakeMinimumRequired": { "major": 3, "minor": 25, "patch": 0 },
     "configurePresets": [
         {
-            "name": "toolchain-windows",
+            "name": "base",
             "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "TRUE",
+
+                // ARM_TOOLCHAIN_DIR: absolute path to the folder that contains
+                // arm-none-eabi-gcc (the toolchain "bin/" directory). Replace the
+                // value below with your own install path. If the toolchain is
+                // already on your PATH, you may delete this line.
+                // NOTE: comments are NOT valid in CMakeUserPresets.json — strip
+                // every "// ..." line after copying this file (see README).
                 "ARM_TOOLCHAIN_DIR": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin"
             }
         },
         {
-            "name": "toolchain-linux",
-            "hidden": true,
-            "cacheVariables": {
-                "ARM_TOOLCHAIN_DIR": "/usr/bin"
-            }
+            "name": "debug",
+            "inherits": "base",
+            "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
         },
         {
-            "name": "dev-debug",
-            "displayName": "Dev Debug (local toolchain)",
-            "inherits": ["debug", "toolchain-windows"]
-        },
-        {
-            "name": "dev-release",
-            "displayName": "Dev Release (local toolchain)",
-            "inherits": ["release", "toolchain-windows"]
+            "name": "release",
+            "inherits": "base",
+            "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
         }
     ],
     "buildPresets": [
-        { "name": "dev-debug",   "configurePreset": "dev-debug" },
-        { "name": "dev-release", "configurePreset": "dev-release" }
+        { "name": "debug",   "configurePreset": "debug" },
+        { "name": "release", "configurePreset": "release" }
     ]
 }
