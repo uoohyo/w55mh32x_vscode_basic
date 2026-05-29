@@ -100,10 +100,8 @@ Then edit `CMakeUserPresets.json`:
 
 1. Set `ARM_TOOLCHAIN_DIR` to your own `arm-none-eabi-gcc` `bin/` directory,
    or delete the line if the toolchain is already on your `PATH`.
-2. Remove every `// ...` comment line. The `cmake` CLI tolerates them, but
-   the VS Code CMake Tools extension (1.8+) refuses to parse a preset file
-   that contains comments — and this project drives builds through that
-   extension, so strip them.
+2. Remove every `// ...` comment line — always strip all comments so the
+   preset file parses cleanly.
 
 With `cmake.useCMakePresets` enabled, the VS Code CMake Tools extension picks
 up `ARM_TOOLCHAIN_DIR` automatically when you select the `debug` / `release`
