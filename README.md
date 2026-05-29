@@ -96,6 +96,11 @@ Then edit `CMakeUserPresets.json`:
 - **Linux**: change `dev-debug` / `dev-release` to inherit `toolchain-linux`
   instead of `toolchain-windows`, then adjust the path.
 
+Set the path to your own toolchain `bin/` directory. With
+`cmake.useCMakePresets` enabled, the VS Code CMake Tools extension picks up
+this `ARM_TOOLCHAIN_DIR` automatically when you select the `dev-debug` /
+`dev-release` preset.
+
 `CMakeUserPresets.json` is gitignored, so machine-specific paths never reach
 the shared repo. Configure and build with the developer presets:
 
