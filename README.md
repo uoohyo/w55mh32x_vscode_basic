@@ -115,10 +115,11 @@ from the task list. Flashing and debugging are driven by the
 Cortex-Debug launch configurations in `.vscode/launch.json` (pyOCD +
 WIZ-Link).
 
-> **Note:** `Ctrl+Shift+B` (Build tasks) requires `arm-none-eabi-gcc` on the
-> system `PATH`. If you rely on `CMakeUserPresets.json` for the toolchain path,
-> build via the CMake Tools GUI (select `dev-debug` / `dev-release`) or the CLI
-> instead.
+> **Note:** The `Ctrl+Shift+B` build tasks use the shared `debug` / `release`
+> presets, which do **not** carry `ARM_TOOLCHAIN_DIR`, so they require
+> `arm-none-eabi-gcc` on your system `PATH`. If your toolchain is not on `PATH`,
+> use the CMake Tools GUI (select `dev-debug` / `dev-release`) or run
+> `cmake --build --preset dev-debug` directly.
 
 ## MCU Info
 
