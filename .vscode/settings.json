@@ -1,5 +1,5 @@
 {
-    // ---- CMake Tools extension ----------------------------------------
+    // ─── 1. CMake Tools ────────────────────────────────────────────────────────
     // Force preset-driven configuration + Ninja so the CMake Tools UI
     // calls into the same flow that `tasks.json` uses. Without this
     // some third-party extensions (e.g. STM32-focused ones) replace the
@@ -10,43 +10,12 @@
     "cmake.configureOnOpen": false,
     "cmake.automaticReconfigure": false,
 
-    // Default cmake/ninja name; PATH-resolved at task time. If your PATH
-    // resolves these to a vendor wrapper (e.g. STM32CubeCLT's bundled
-    // cmake or any "cube-cmake.exe"-style shim), override them in
-    // ".vscode/settings.local.json" (already gitignored) with absolute
-    // paths, for example:
-    //   "cmake.cmakePath": "C:/Program Files/CMake/bin/cmake.exe",
-    //   "cmake.ninjaPath": "C:/Program Files/Ninja/ninja.exe"
-    "cmake.cmakePath": "C:/Program Files/CMake/bin/cmake.exe",
-    "cmake.ninjaPath": "ninja",
-
-    // cmake-tools ignores "cmake.configureSettings" when
-    // "cmake.useCMakePresets" is "always" (see the extension docs). The
-    // reliable substitute is "cmake.environment": environment variables
-    // here are exported into the cmake process every time the extension
-    // runs configure / build, so the toolchain file's
-    //   if(DEFINED ENV{ARM_TOOLCHAIN_DIR}) ...
-    // branch always wins.
-    "cmake.environment": {
-        "ARM_TOOLCHAIN_DIR": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin"
-    },
-
-    // tasks.json runs `cmake --preset ...` in the integrated terminal,
-    // which does NOT inherit "cmake.environment". Inject the same vars
-    // into the Windows terminal environment so the CLI path matches the
-    // extension path. Prepending PATH ensures the Arm toolchain bin/
-    // wins over any STM32CubeCLT GNU tools that sit on the system PATH.
-    "terminal.integrated.env.windows": {
-        "ARM_TOOLCHAIN_DIR": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin",
-        "PATH": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin;${env:PATH}"
-    },
-
-    // ---- File hygiene -------------------------------------------------
+    // ─── 2. File Hygiene ───────────────────────────────────────────────────────
     "files.eol": "\n",
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
 
-    // ---- C / C++ basics ----------------------------------------------
+    // ─── 3. C / C++ ────────────────────────────────────────────────────────────
     "[c]": {
         "editor.tabSize": 4,
         "editor.insertSpaces": true
@@ -56,6 +25,7 @@
         "editor.insertSpaces": true
     },
 
+    // ─── 4. Spell Checker ──────────────────────────────────────────────────────
     "cSpell.words": [
         "ABRQ",
         "ACCMOD",
@@ -82,6 +52,7 @@
         "ALRH",
         "ALRIE",
         "ALRL",
+        "ALST",
         "APB1",
         "APB2",
         "APBAHB",
@@ -493,9 +464,12 @@
         "ISRPENDING",
         "ISRPREEMPT",
         "ITATBCTR",
+        "ITBUFEN",
         "ITCTRL",
         "ITEN",
         "itenable",
+        "ITERREN",
+        "ITEVTEN",
         "ITM",
         "itmask",
         "ITMENA",
@@ -569,6 +543,7 @@
         "MANCVALID",
         "MAPR",
         "MBKEN",
+        "MCKOE",
         "MCLK",
         "mcpu",
         "MEMFAULTENA",

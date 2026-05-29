@@ -1,6 +1,6 @@
 {
     "version": 6,
-    "cmakeMinimumRequired": { "major": 3, "minor": 22, "patch": 0 },
+    "cmakeMinimumRequired": { "major": 3, "minor": 25, "patch": 0 },
     "configurePresets": [
         {
             "name": "base",
@@ -8,6 +8,13 @@
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
+                // ARM_TOOLCHAIN_DIR: Absolute path to the ARM GCC toolchain bin directory
+                // Windows example: "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin"
+                // Linux example: "/usr/bin" or "/opt/arm-gnu-toolchain/bin"
+                // Specify the directory containing the arm-none-eabi-gcc executable.
+                // Remove these comments after copying, as VS Code CMake Tools may reject them.
+                // If arm-none-eabi-gcc is already in PATH, you can delete this entire line.
+                "ARM_TOOLCHAIN_DIR": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "TRUE"
             }
         },
