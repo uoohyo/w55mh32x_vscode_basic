@@ -1,5 +1,5 @@
 {
-    // ---- CMake Tools extension ----------------------------------------
+    // ─── 1. CMake Tools ────────────────────────────────────────────────────────
     // Force preset-driven configuration + Ninja so the CMake Tools UI
     // calls into the same flow that `tasks.json` uses. Without this
     // some third-party extensions (e.g. STM32-focused ones) replace the
@@ -29,6 +29,7 @@
         "ARM_TOOLCHAIN_DIR": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin"
     },
 
+    // ─── 2. Terminal Environment ───────────────────────────────────────────────
     // tasks.json runs `cmake --preset ...` in the integrated terminal,
     // which does NOT inherit "cmake.environment". Inject the same vars
     // into the Windows terminal environment so the CLI path matches the
@@ -39,12 +40,12 @@
         "PATH": "C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin;${env:PATH}"
     },
 
-    // ---- File hygiene -------------------------------------------------
+    // ─── 3. File Hygiene ───────────────────────────────────────────────────────
     "files.eol": "\n",
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
 
-    // ---- C / C++ basics ----------------------------------------------
+    // ─── 4. C / C++ ────────────────────────────────────────────────────────────
     "[c]": {
         "editor.tabSize": 4,
         "editor.insertSpaces": true
@@ -54,6 +55,7 @@
         "editor.insertSpaces": true
     },
 
+    // ─── 5. Spell Checker ──────────────────────────────────────────────────────
     "cSpell.words": [
         "ABRQ",
         "ACCMOD",
