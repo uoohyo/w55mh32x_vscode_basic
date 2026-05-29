@@ -50,6 +50,8 @@ CMakeUserPresets.json
 # Local VS Code overrides (team-shared .vscode/ files are tracked)
 .vscode/*.local.json
 .vscode/settings.local.json
+# Per-developer IntelliSense config (machine-specific include / compiler paths)
+.vscode/c_cpp_properties.json
 
 # Debugger / probe logs
 JLinkLog.txt
